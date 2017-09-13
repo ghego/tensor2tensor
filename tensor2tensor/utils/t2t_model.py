@@ -191,6 +191,10 @@ class T2TModel(object):
     Returns:
        samples: an integer `Tensor`.
     """
+    tf.logging.info("DEBUG - infer.features - %s", features)
+    tf.logging.info("DEBUG - infer.decode_length- %s", decode_length)
+    tf.logging.info("DEBUG - infer.has_input- %s", self.has_input)
+
     # TODO(rsepassi): Make decoding work with real-valued model outputs
     # (i.e. if the target modality is RealModality).
     if not self.has_input:
