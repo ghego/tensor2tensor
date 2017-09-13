@@ -180,6 +180,19 @@ def attention_lm_small():
   hparams.layer_prepostprocess_dropout = 0.5
   return hparams
 
+@registry.register_hparams
+def attention_lm_tiny():
+  """Cheap model.
+
+  Returns:
+    an hparams object.
+  """
+  hparams = attention_lm_base()
+  hparams.num_hidden_layers = 3
+  hparams.hidden_size = 256
+  hparams.filter_size = 512
+  hparams.layer_prepostprocess_dropout = 0.5
+  return hparams
 
 @registry.register_hparams
 def attention_lm_translation():

@@ -109,19 +109,29 @@ def decode_for_dummies(estimator, decode_string, decode_length_int, decode_hp):
 
   for result in result_iter:
     tf.logging.info("DEBUG - result %s" % result)
-    # if decode_hp.return_beams:
-    #   beam_decodes = []
-    #   output_beams = np.split(result["outputs"], decode_hp.beam_size, axis=0)
+    if decode_hp.return_beams:
+      beam_decodes = []
+      output_beams = np.split(result["outputs"], decode_hp.beam_size, axis=0)
       
-    #   for k, beam in enumerate(output_beams):
-    #     tf.logging.info("BEAM %d:" % k)
-    #     decoded_outputs, _ = log_decode_results(result["inputs"], beam, problem_name, None, inputs_vocab, targets_vocab)
-    #     beam_decodes.append(decoded_outputs)
+      for k, beam in enumerate(output_beams):
+        tf.logging.info("BEAM %d:" % k)
+        decoded_outputs, _ = log_decode_results(result["inputs"], beam, problem_name, None, inputs_vocab, targets_vocab)
+        beam_decodes.append(decoded_outputs)
 
-    #   decodes.append("\t".join(beam_decodes))
-    # else:
-    #   decoded_outputs, _ = log_decode_results(result["inputs"], result["outputs"], problem_name, None, inputs_vocab, targets_vocab)
-    #   decodes.append(decoded_outputs)
+      decodes.append("\t".join(beam_decodes))
+    else:
+      flat_results = result["outputs"].flatten()
+      temp = np.ones(len(flat_results), dtype=int)
+      i = 0
+      for c in flat_results:
+        if c == 1:
+          continue
+        temp[i] = c
+        i += 1
+
+      result["outputs"] = temp.reshape(result["outputs"].shape)
+      decoded_outputs, _ = log_decode_results(result["inputs"], result["outputs"], problem_name, None, inputs_vocab, targets_vocab)
+      decodes.append(decoded_outputs)
 
   # # Reversing the decoded inputs and outputs because they were reversed in
   # # _decode_batch_input_fn
