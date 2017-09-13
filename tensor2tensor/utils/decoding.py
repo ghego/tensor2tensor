@@ -301,7 +301,6 @@ def decode_interactively(estimator, decode_hp):
     step4 = _interactive_input_tensor_to_features_dict(step3, hparams)
     #step4 = _decode_input_tensor_to_features_dict(step3, hparams)
     tf.logging.info("DEBUG - step4 %s", step4)
-
     return step4
 
   result_iter = estimator.predict(input_fn)
@@ -548,19 +547,19 @@ def _interactive_input_tensor_to_features_dict(feature_map, hparams):
       num_samples = x[0]
       length      = x[2]
       
-      tf.logging.info("DEBUG num_samples: %s" % num_samples)
-      tf.logging.info("DEBUG length: %s" % length)
+      num_samples = tf.Print(num_samples, [num_samples], message="DEBUG num_samples: ")
+      length = tf.Print(length, [length], message="DEBUG: length ")
 
-      x           = tf.slice(x, [3], tf.to_int32([length]))
-      tf.logging.info("DEBUG x: %s" % x)
+      x = tf.slice(x, [3], tf.to_int32([length]))
+      x = tf.Print(x, [x], message="DEBUG: x ")
 
-      x           = tf.reshape(x, [1, -1, 1, 1])
-      tf.logging.info("DEBUG x: %s" % x)
+      x = tf.reshape(x, [1, -1, 1, 1])
+      x = tf.Print(x, [x], message="DEBUG: x ")
 
       # Transform into a batch of size num_samples to get that many random
       # decodes.
       x = tf.tile(x, tf.to_int32([num_samples, 1, 1, 1]))
-      tf.logging.info("DEBUG x: %s" % x)
+      x = tf.Print(x, [x], message="DEBUG: x ")
 
     p_hparams = hparams.problems[problem_choice]
     return (tf.constant(p_hparams.input_space_id), tf.constant(p_hparams.target_space_id), x)
@@ -573,7 +572,8 @@ def _interactive_input_tensor_to_features_dict(feature_map, hparams):
   features["problem_choice"]  = tf.convert_to_tensor(feature_map["problem_choice"])
   features["input_space_id"]  = input_space_id
   features["target_space_id"] = target_space_id
-  features["decode_length"]   = inputs[1]
+  decode_length = tf.Print(inputs[1], [inputs[1]], message="DEBUG: decode length ")
+  features["decode_length"]   = decode_length
   features["inputs"]          = x
 
   return features
