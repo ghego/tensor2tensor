@@ -43,7 +43,7 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_bool("registry_help", False,
                   "If True, logs the contents of the registry and exits.")
-flags.DEFINE_bool("tfdbg", False,
+flags.DEFINE_bool("tfdbg", True,
                   "If True, use the TF debugger CLI on train/eval.")
 flags.DEFINE_string("output_dir", "", "Base output directory for run.")
 flags.DEFINE_string("model", "", "Which model to use.")
