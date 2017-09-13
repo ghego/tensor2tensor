@@ -93,7 +93,7 @@ class LanguagemodelWikiFull32k(problem.Text2TextProblem):
 
   @property
   def has_inputs(self):
-    return True
+    return False
 
   @property
   def input_space_id(self):

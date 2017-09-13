@@ -86,7 +86,7 @@ def decode_for_dummies(estimator, decode_string, decode_length_int, decode_hp):
   """Compute predictions on entries in filename and write them out."""
   hparams       = estimator.params
   problem_id    = decode_hp.problem_idx
-  inputs_vocab  = hparams.problems[problem_id].vocabulary["inputs"]
+  inputs_vocab  = hparams.problems[problem_id].vocabulary["targets"]
   targets_vocab = hparams.problems[problem_id].vocabulary["targets"]
   problem_name  = FLAGS.problems.split("-")[problem_id]
 

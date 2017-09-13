@@ -191,6 +191,7 @@ class T2TModel(object):
     Returns:
        samples: an integer `Tensor`.
     """
+    decode_length=3
     tf.logging.info("DEBUG - infer.features - %s", features)
     tf.logging.info("DEBUG - infer.decode_length- %s", decode_length)
     tf.logging.info("DEBUG - infer.has_input- %s", self.has_input)
@@ -337,6 +338,7 @@ class T2TModel(object):
     # Create an initial output tensor. This will be passed
     # to the infer_step, which adds one timestep at every iteration.
     if "partial_targets" in features:
+      batch_size = 1
       initial_output = tf.convert_to_tensor(features["partial_targets"])
     else:
       batch_size = tf.shape(features["inputs"])[0]
