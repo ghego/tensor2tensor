@@ -50,7 +50,7 @@ flags.DEFINE_string("decode_from_file", None, "Path to decode file")
 flags.DEFINE_string("decode_to_file", None, "Path prefix to inference output file")
 
 flags.DEFINE_bool("decode_for_dummies", False, "Decode for dummits")
-flags.DEFINE_integer("decode_for_dummies_length", 1000, "Decode for dummits")
+flags.DEFINE_integer("decode_for_dummies_length", 500, "Decode for dummits")
 flags.DEFINE_string("decode_for_dummies_incipit", None, "Decode for dummits")
 
 flags.DEFINE_bool("decode_interactive", False, "Interactive local inference mode.")
@@ -75,6 +75,8 @@ def main(_):
   output_dir = os.path.expanduser(FLAGS.output_dir)
 
   hparams      = trainer_utils.create_hparams(FLAGS.hparams_set, FLAGS.problems, data_dir, passed_hparams=FLAGS.hparams)
+  #tf.logging.info("DEBUG hparams: %s" % hparams)
+
   estimator, _ = trainer_utils.create_experiment_components(
                               hparams    = hparams,
                               output_dir = output_dir,
