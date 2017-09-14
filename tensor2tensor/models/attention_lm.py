@@ -193,7 +193,6 @@ def attention_lm_tiny():
   hparams.hidden_size = 256
   hparams.batch_size = 128
   hparams.filter_size = 256
-  hparams.max_length = 32
   hparams.layer_prepostprocess_dropout = 0.6
   return hparams
 
