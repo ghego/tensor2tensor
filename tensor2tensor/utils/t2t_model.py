@@ -191,6 +191,7 @@ class T2TModel(object):
     Returns:
        samples: an integer `Tensor`.
     """
+    
     tf.logging.info("DEBUG - infer.features - %s", features)
     tf.logging.info("DEBUG - infer.decode_length- %s", decode_length)
     tf.logging.info("DEBUG - infer.has_input- %s", self.has_input)
@@ -307,7 +308,11 @@ class T2TModel(object):
     if "inputs" in features and len(features["inputs"].shape) < 4:
       inputs_old = features["inputs"]
       features["inputs"] = tf.expand_dims(features["inputs"], 2)
+
     if not self.has_input:
+      features["partial_targets"] = tf.to_int64(features["inputs"])
+
+    if "incipit" in features:
       features["partial_targets"] = tf.to_int64(features["inputs"])
 
     def infer_step(recent_output, recent_logits, unused_loss):

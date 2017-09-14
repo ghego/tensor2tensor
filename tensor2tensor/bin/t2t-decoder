@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Decode from trained T2T models.
+"""Decode from trained T2T models.
 
 This binary performs inference using the Estimator API.
 

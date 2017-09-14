@@ -78,6 +78,7 @@ def _decode_input_tensor_to_features_dict_dummies(feature_map, decode_length_int
   features["target_space_id"] = target_space_id
   features["decode_length"]   = tf.constant(decode_length_int)
   features["inputs"]          = x
+  features["incipit"]         = x
 
   return features
 
