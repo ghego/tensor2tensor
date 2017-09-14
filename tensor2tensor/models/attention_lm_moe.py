@@ -131,7 +131,7 @@ class AttentionLmMoe(t2t_model.T2TModel):
     x = dp_remove_pad(x)
     x = dp(print_shape, x, "in_flat")
 
-    assert hparams.batch_size >= hparams.max_length
+    #assert hparams.batch_size >= hparams.max_length
 
     for layer in xrange(hparams.num_hidden_layers):
       with tf.variable_scope("layer_%d" % layer):

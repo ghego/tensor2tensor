@@ -159,6 +159,7 @@ def attention_lm_base():
   hparams.add_hparam("relu_dropout", 0.0)
   hparams.add_hparam("pos", "timing")  # timing, none
   hparams.add_hparam("encoder_full_attention", int(False))
+  
   return hparams
 
 
