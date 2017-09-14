@@ -189,10 +189,11 @@ def attention_lm_tiny():
     an hparams object.
   """
   hparams = attention_lm_base()
-  hparams.num_hidden_layers = 3
+  hparams.num_hidden_layers = 2
   hparams.hidden_size = 256
-  hparams.filter_size = 512
-  hparams.layer_prepostprocess_dropout = 0.5
+  hparams.batch_size = 128
+  hparams.filter_size = 256
+  hparams.layer_prepostprocess_dropout = 0.6
   return hparams
 
 @registry.register_hparams
