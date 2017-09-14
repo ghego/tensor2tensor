@@ -191,7 +191,7 @@ class T2TModel(object):
     Returns:
        samples: an integer `Tensor`.
     """
-    decode_length=10
+    decode_length=100
     tf.logging.info("DEBUG - infer.features - %s", features)
     tf.logging.info("DEBUG - infer.decode_length- %s", decode_length)
     tf.logging.info("DEBUG - infer.has_input- %s", self.has_input)
