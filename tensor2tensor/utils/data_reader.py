@@ -426,6 +426,14 @@ def _batching_scheme(batch_size,
        * batch_sizes: list of batch sizes for each length bucket
        * max_length: int, maximum length of an example
   """
+  input_vals = {"batch_size: ", batch_size,
+                "max_length: ", max_length,
+                "min_length_bucket: ", min_length_bucket,
+                "length_bucket_step: ", length_bucket_step,
+                "drop_long_sequences: ", drop_long_sequences,
+                "shard_multiplier: ", shard_multiplier,
+               "length_multiplier: ", length_multiplier}
+  tf.logging.info("DEBUG: batching_scheme input_vals = %s" % input_vals)
   max_length = max_length or batch_size
   boundaries = _bucket_boundaries(max_length, min_length_bucket,
                                   length_bucket_step)

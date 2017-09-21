@@ -433,6 +433,23 @@ def attention_lm_moe_tiny():
 
 
 @registry.register_hparams
+def attention_lm_super_tiny():
+  """Cheap model.
+
+  Returns:
+    an hparams object.
+  """
+  hparams = attention_lm_moe_small()
+  hparams.num_hidden_layers = 2
+  hparams.hidden_size = 128
+  hparams.batch_size = 64
+  hparams.filter_size = 128
+  hparams.moe_num_experts = 4
+  hparams.max_length = 0
+  return hparams
+
+
+@registry.register_hparams
 def attention_lm_attention_moe_tiny():
   """Cheap model for debugging.
 
